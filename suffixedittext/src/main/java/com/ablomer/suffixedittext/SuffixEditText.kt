@@ -42,16 +42,8 @@ class SuffixEditText @JvmOverloads constructor(
             try {
                 getString(R.styleable.SuffixEditText_suffix)?.let { mSuffix = it }
                 getString(R.styleable.SuffixEditText_hintSuffix)?.let { mHintSuffix = it }
-
-                val suffixColor = getColor(R.styleable.SuffixEditText_suffixColor, -1)
-
-                if (suffixColor != -1)
-                    mSuffixColor = suffixColor
-
-                val hintSuffixColor = getColor(R.styleable.SuffixEditText_hintSuffixColor, -1)
-
-                if (hintSuffixColor != -1)
-                    mHintSuffixColor = hintSuffixColor
+                getColor(R.styleable.SuffixEditText_suffixColor, -1).takeUnless { it == -1 }?.let { mSuffixColor = it }
+                getColor(R.styleable.SuffixEditText_hintSuffixColor, -1).takeUnless { it == -1 }?.let { mHintSuffixColor = it }
 
             } finally {
                 recycle()
