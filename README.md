@@ -61,6 +61,6 @@ Add the dependency
     ...
     app:suffix=".text"
     app:suffixColor="@color/colorPrimary"
-    app:hintSuffixColor="@color/colorAccent"
-    app:hintSuffix=".hint" />
+    app:hintSuffix=".hint"
+    app:hintSuffixColor="@color/colorAccent" />
 ```
