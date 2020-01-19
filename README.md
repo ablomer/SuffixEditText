@@ -1,8 +1,8 @@
 # SuffixEditText
 
 [![API](https://img.shields.io/badge/API-16%2B-green.svg?style=flat)](https://android-arsenal.com/api?level=14)
-[![Build Status](https://travis-ci.com/augustoblomer/SuffixEditText.svg?branch=master)](https://travis-ci.com/augustoblomer/SuffixEditText)
-[![](https://jitpack.io/v/augustoblomer/SuffixEditText.svg)](https://jitpack.io/#augustoblomer/SuffixEditText)
+[![Build Status](https://travis-ci.com/ablomer/SuffixEditText.svg?branch=master)](https://travis-ci.com/ablomer/SuffixEditText)
+[![](https://jitpack.io/v/ablomer/SuffixEditText.svg)](https://jitpack.io/#ablomer/SuffixEditText)
 
 Android EditText with suffix functionality
 
@@ -27,7 +27,7 @@ Add the dependency
 
 ```gradle
 dependencies {
-    implementation 'com.github.augustoblomer:SuffixEditText:1.1'
+    implementation 'com.github.ablomer:SuffixEditText:1.1'
 }
 ```
 
@@ -48,7 +48,7 @@ Add the dependency
 
 ```xml
 <dependency>
-    <groupId>com.github.augustoblomer</groupId>
+    <groupId>com.github.ablomer</groupId>
     <artifactId>SuffixEditText</artifactId>
     <version>1.1</version>
 </dependency>
@@ -57,7 +57,7 @@ Add the dependency
 ## Usage
 
 ```xml
-<com.github.augustoblomer.suffixedittext.SuffixEditText
+<com.github.ablomer.suffixedittext.SuffixEditText
     ...
     app:suffix=".text"
     app:suffixColor="@color/colorPrimary"
