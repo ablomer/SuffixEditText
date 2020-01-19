@@ -4,6 +4,8 @@
     <declare-styleable name="SuffixEditText">
         <attr name="suffix" format="string" />
         <attr name="hintSuffix" format="string" />
+        <attr name="suffixColor" format="color" />
+        <attr name="hintSuffixColor" format="color" />
     </declare-styleable>
 
 </resources>

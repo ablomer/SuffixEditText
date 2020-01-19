@@ -10,8 +10,41 @@
     <com.ablomer.suffixedittext.SuffixEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="filename"
-        app:suffix=".text"
+        android:text="filename"
+        app:suffix=".hint"
+        android:layout_margin="24dp" />
+
+    <com.ablomer.suffixedittext.SuffixEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="hint_filename"
+        app:hintSuffix=".hint"
+        android:layout_margin="24dp" />
+
+    <com.ablomer.suffixedittext.SuffixEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="filename"
+        app:suffix=".hint"
+        app:suffixColor="@color/colorAccent"
+        android:layout_margin="24dp" />
+
+    <com.ablomer.suffixedittext.SuffixEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="hint_filename"
+        app:hintSuffixColor="@color/colorAccent"
+        app:hintSuffix=".hint"
+        android:layout_margin="24dp" />
+
+    <com.ablomer.suffixedittext.SuffixEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="filename"
+        app:suffix=".hint"
+        app:suffixColor="@color/colorPrimary"
+        android:hint="hint_filename"
+        app:hintSuffixColor="@color/colorAccent"
         app:hintSuffix=".hint"
         android:layout_margin="24dp" />
 

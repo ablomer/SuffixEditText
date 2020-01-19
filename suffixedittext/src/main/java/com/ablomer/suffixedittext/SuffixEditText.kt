@@ -2,6 +2,7 @@ package com.ablomer.suffixedittext
 
 import android.content.Context
 import android.graphics.Canvas
+import android.text.TextPaint
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatEditText
 
@@ -23,10 +24,14 @@ class SuffixEditText @JvmOverloads constructor(
 
     private var mOriginalLeftPadding = -1f
     private var mTextWidth = 0f
+
+    private lateinit var mSuffixPaint: TextPaint
     private var mHintMode = false
 
     private var mSuffix = ""
     private var mHintSuffix = ""
+    private var mSuffixColor: Int? = null
+    private var mHintSuffixColor: Int? = null
 
     init {
         // Disable multi-line text
@@ -37,6 +42,17 @@ class SuffixEditText @JvmOverloads constructor(
             try {
                 getString(R.styleable.SuffixEditText_suffix)?.let { mSuffix = it }
                 getString(R.styleable.SuffixEditText_hintSuffix)?.let { mHintSuffix = it }
+
+                val suffixColor = getColor(R.styleable.SuffixEditText_suffixColor, -1)
+
+                if (suffixColor != -1)
+                    mSuffixColor = suffixColor
+
+                val hintSuffixColor = getColor(R.styleable.SuffixEditText_hintSuffixColor, -1)
+
+                if (hintSuffixColor != -1)
+                    mHintSuffixColor = hintSuffixColor
+
             } finally {
                 recycle()
             }
@@ -57,13 +73,22 @@ class SuffixEditText @JvmOverloads constructor(
             invalidate()
         }
 
+    val suffixColor: Int
+        get() = mSuffixColor ?: currentTextColor
+
+    val hintSuffixColor: Int
+        get() = mHintSuffixColor ?: currentHintTextColor
+
     val textWithSuffix: String
         get() = text.toString() + mSuffix
 
     val hintWithSuffix: String
         get() = hint.toString() + mHintSuffix
 
-    private fun calculateSuffix(text: String) {
+    private fun calculateSuffix(text: String?) {
+        if (text == null)
+            return
+
         mOriginalLeftPadding = compoundPaddingLeft.toFloat()
         val widths = FloatArray(text.length)
         paint.getTextWidths(text, widths)
@@ -74,12 +99,15 @@ class SuffixEditText @JvmOverloads constructor(
     }
 
     override fun onPreDraw(): Boolean {
+        mSuffixPaint = TextPaint(paint)
         mHintMode = text.isNullOrEmpty()
 
         if (mHintMode) {
-            calculateSuffix(hint.toString())
+            mHintSuffixColor?.let { mSuffixPaint.color = it }
+            calculateSuffix(hint?.toString())
         } else {
-            calculateSuffix(text.toString())
+            mSuffixColor?.let { mSuffixPaint.color = it }
+            calculateSuffix(text?.toString())
         }
 
         return super.onPreDraw()
@@ -91,7 +119,7 @@ class SuffixEditText @JvmOverloads constructor(
             if (mHintMode) mHintSuffix else mSuffix,
             mOriginalLeftPadding + mTextWidth,
             getLineBounds(0, null).toFloat(),
-            paint
+            mSuffixPaint
         )
     }
 }
