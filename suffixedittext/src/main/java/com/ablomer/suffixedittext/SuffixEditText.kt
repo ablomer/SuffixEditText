@@ -7,6 +7,8 @@ import androidx.appcompat.widget.AppCompatEditText
 
 
 /**
+ * Extended EditText with suffix features
+ *
  * @author Augusto A. Blomer
  */
 class SuffixEditText @JvmOverloads constructor(
@@ -54,6 +56,12 @@ class SuffixEditText @JvmOverloads constructor(
             mHintSuffix = suffix
             invalidate()
         }
+
+    val textWithSuffix: String
+        get() = text.toString() + mSuffix
+
+    val hintWithSuffix: String
+        get() = hint.toString() + mHintSuffix
 
     private fun calculateSuffix(text: String) {
         mOriginalLeftPadding = compoundPaddingLeft.toFloat()
