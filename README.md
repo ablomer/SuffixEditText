@@ -27,7 +27,7 @@ Add the dependency
 
 ```gradle
 dependencies {
-    implementation 'com.github.augustoblomer:SuffixEditText:Tag'
+    implementation 'com.github.augustoblomer:SuffixEditText:1.1'
 }
 ```
 
@@ -50,6 +50,17 @@ Add the dependency
 <dependency>
     <groupId>com.github.augustoblomer</groupId>
     <artifactId>SuffixEditText</artifactId>
-    <version>Tag</version>
+    <version>1.1</version>
 </dependency>
+```
+
+## Usage
+
+```xml
+<com.github.augustoblomer.suffixedittext.SuffixEditText
+    ...
+    app:suffix=".text"
+    app:suffixColor="@color/colorPrimary"
+    app:hintSuffixColor="@color/colorAccent"
+    app:hintSuffix=".hint" />
 ```
