@@ -15,14 +15,26 @@ class SuffixEditText @JvmOverloads constructor(
     defStyleAttr: Int = androidx.appcompat.R.attr.editTextStyle
 ) : AppCompatEditText(context, attrs, defStyleAttr) {
 
+    companion object {
+        const val AUTOFILL_TYPE_TEXT = 1
+    }
+
     private var mOriginalLeftPadding = -1f
     private var mTextWidth = 0f
+    private var mHintMode = false
+
     private var mSuffix = ""
+    private var mHintSuffix = ""
 
     init {
+        // Disable multi-line text
+        inputType = AUTOFILL_TYPE_TEXT
+        maxLines = 1
+
         context.obtainStyledAttributes(attrs, R.styleable.SuffixEditText, 0, 0).apply {
             try {
                 getString(R.styleable.SuffixEditText_suffix)?.let { mSuffix = it }
+                getString(R.styleable.SuffixEditText_hintSuffix)?.let { mHintSuffix = it }
             } finally {
                 recycle()
             }
@@ -36,12 +48,17 @@ class SuffixEditText @JvmOverloads constructor(
             invalidate()
         }
 
-    private fun calculateSuffix() {
+    var hintSuffix: String
+        get() = mHintSuffix
+        set(suffix) {
+            mHintSuffix = suffix
+            invalidate()
+        }
+
+    private fun calculateSuffix(text: String) {
         mOriginalLeftPadding = compoundPaddingLeft.toFloat()
-        var displayedText: String = text.toString()
-        if (displayedText.isEmpty()) displayedText = hint.toString()
-        val widths = FloatArray(displayedText.length)
-        paint.getTextWidths(displayedText, widths)
+        val widths = FloatArray(text.length)
+        paint.getTextWidths(text, widths)
         mTextWidth = 0f
         for (w in widths) {
             mTextWidth += w
@@ -49,17 +66,24 @@ class SuffixEditText @JvmOverloads constructor(
     }
 
     override fun onPreDraw(): Boolean {
-        calculateSuffix()
+        mHintMode = text.isNullOrEmpty()
+
+        if (mHintMode) {
+            calculateSuffix(hint.toString())
+        } else {
+            calculateSuffix(text.toString())
+        }
+
         return super.onPreDraw()
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         canvas.drawText(
-            mSuffix, mOriginalLeftPadding + mTextWidth,
+            if (mHintMode) mHintSuffix else mSuffix,
+            mOriginalLeftPadding + mTextWidth,
             getLineBounds(0, null).toFloat(),
             paint
         )
     }
 }
-
