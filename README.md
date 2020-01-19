@@ -17,7 +17,7 @@ Add the JitPack repository to your root build.gradle file
 ```gradle
 allprojects {
     repositories {
-        ...
+        // ...
         maven { url 'https://jitpack.io' }
     }
 }
