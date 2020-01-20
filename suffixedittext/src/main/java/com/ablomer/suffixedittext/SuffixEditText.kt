@@ -2,7 +2,6 @@ package com.ablomer.suffixedittext
 
 import android.content.Context
 import android.graphics.Canvas
-import android.text.TextPaint
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatEditText
 
@@ -24,8 +23,6 @@ class SuffixEditText @JvmOverloads constructor(
 
     private var mOriginalLeftPadding = -1f
     private var mTextWidth = 0f
-
-    private lateinit var mSuffixPaint: TextPaint
     private var mHintMode = false
 
     private var mSuffix = ""
@@ -91,14 +88,11 @@ class SuffixEditText @JvmOverloads constructor(
     }
 
     override fun onPreDraw(): Boolean {
-        mSuffixPaint = TextPaint(paint)
         mHintMode = text.isNullOrEmpty()
 
         if (mHintMode) {
-            mHintSuffixColor?.let { mSuffixPaint.color = it }
             calculateSuffix(hint?.toString())
         } else {
-            mSuffixColor?.let { mSuffixPaint.color = it }
             calculateSuffix(text?.toString())
         }
 
@@ -107,11 +101,15 @@ class SuffixEditText @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
+
+        mHintSuffixColor?.let { paint.color = it }
+        mSuffixColor?.let { paint.color = it }
+
         canvas.drawText(
             if (mHintMode) mHintSuffix else mSuffix,
             mOriginalLeftPadding + mTextWidth,
             getLineBounds(0, null).toFloat(),
-            mSuffixPaint
+            paint
         )
     }
 }
