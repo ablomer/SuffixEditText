@@ -27,7 +27,7 @@ Add the dependency
 
 ```gradle
 dependencies {
-    implementation 'com.github.ablomer:SuffixEditText:1.1'
+    implementation 'com.github.ablomer:SuffixEditText:1.1.1'
 }
 ```
 
@@ -50,7 +50,7 @@ Add the dependency
 <dependency>
     <groupId>com.github.ablomer</groupId>
     <artifactId>SuffixEditText</artifactId>
-    <version>1.1</version>
+    <version>1.1.1</version>
 </dependency>
 ```
 
